@@ -4,6 +4,12 @@ if (!requireNamespace("stringr", quietly = TRUE)) install.packages("stringr")
 if (!requireNamespace("cli", quietly = TRUE)) install.packages("cli")
 if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
 
+# Needs the following secrets:
+# github.com/username/repo -> Settings -> Secrets
+# SHINYAPPS_IO_TOKEN
+# SHINYAPPS_IO_SECRET
+
+
 # message(Sys.getenv('GITHUB_REPOSITORY'))
 # message(Sys.getenv("GITHUB_REF"))
 # message(Sys.getenv("COMMIT_MESSAGE"))
@@ -27,7 +33,9 @@ deploy = function(account = "jumpingrivers", server = "shinyapps.io") {
 
   branch_name = stringr::str_match(Sys.getenv('GITHUB_REF'), "^refs/heads/(.*)$")[1, 2]
   repo_name = stringr::str_match(Sys.getenv("GITHUB_REPOSITORY"), ".*/(.*)$")[1, 2]
-  appName = paste(repo_name, branch_name, sep = "-")
+  appName = if (branch_name %in% c("master", "main")) repo_name
+  else paste(repo_name, branch_name, sep = "-")
+
   cli::cli_alert_info("appName: ", appName)
   rsconnect::deployApp(
     account = account, server = server,
