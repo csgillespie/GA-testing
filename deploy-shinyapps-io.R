@@ -16,18 +16,18 @@ message(is.na(Sys.getenv("SHINYAPPS_IO_TOKEN", NA)))
 #   cli::cli_alert_success("{path} installed!")
 # }
 #
-# deploy = function(account = "jumpingrivers", server = "shinyapps.io") {
-#   cli::cli_h1("Deploying app")
-#   rsconnect::setAccountInfo(name = account,
-#                             token = Sys.getenv("SHINYAPPS_IO_TOKEN"),
-#                             secret = Sys.getenv("SHINYAPPS_IO_SECRET"))
-#   slug = stringr::str_match(Sys.getenv('GITHUB_REPOSITORY'), "/(.*)")[1, 2]
-#   appName = paste(slug, Sys.getenv("GITHUB_BASE_REF"), sep = "-")
-#   rsconnect::deployApp(
-#     account = account, server = server,
-#     appDir = system.file("example", package = "diagramNAT"), appName = appName)
-#   cli::cli_alert_success("{appName} successfully deployed")
-# }
+deploy = function(account = "jumpingrivers", server = "shinyapps.io") {
+  cli::cli_h1("Deploying app")
+  rsconnect::setAccountInfo(name = account,
+                            token = Sys.getenv("SHINYAPPS_IO_TOKEN"),
+                            secret = Sys.getenv("SHINYAPPS_IO_SECRET"))
+  slug = stringr::str_match(Sys.getenv('GITHUB_REPOSITORY'), "refs/heads/(.*)$")[1, 2]
+  appName = paste(slug, Sys.getenv("GITHUB_BASE_REF"), sep = "-")
+  rsconnect::deployApp(
+    account = account, server = server,
+    appDir = system.file("example", package = "diagramNAT"), appName = appName)
+  cli::cli_alert_success("{appName} successfully deployed")
+}
 
 # terminate = function(account = "jumpingrivers", server = "shinyapps.io") {
 #   msg = Sys.getenv("TRAVIS_COMMIT_MESSAGE")
@@ -43,7 +43,7 @@ message(is.na(Sys.getenv("SHINYAPPS_IO_TOKEN", NA)))
 # }
 #
 
-install_pkg()
-#deploy(account = "nationalarchives")
+# install_pkg()
+deploy(account = "jumpingrivers")
 #terminate(account = "nationalarchives")
 

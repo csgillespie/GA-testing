@@ -14,6 +14,8 @@ jobs:
     env:
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      SHINYAPPS_IO_TOKEN: ${{ secrets.SHINYAPPS_IO_TOKEN }}
+      SHINYAPPS_IO_SECRET: ${{ secrets.SHINYAPPS_IO_SECRET }}
 
     steps:
       - name: Checkout Project
