@@ -27,7 +27,7 @@ deploy = function(account = "jumpingrivers", server = "shinyapps.io") {
 
   branch_name = stringr::str_match(Sys.getenv('GITHUB_REF'), "^refs/heads/(.*)$")[1, 2]
   repo_name = stringr::str_match(Sys.getenv("GITHUB_REPOSITORY"), ".*/(.*)$")[1, 2]
-  appName = paste(repo_name, branch_name sep = "-")
+  appName = paste(repo_name, branch_name, sep = "-")
   cli::cli_alert_info("appName: ", appName)
   rsconnect::deployApp(
     account = account, server = server,
