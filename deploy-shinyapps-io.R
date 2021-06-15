@@ -1,4 +1,4 @@
-if (!requireNamespace("rsconnect", quietly = TRUE)) install.packages("rsconnect")
+install.packages("rsconnect", dependencies = TRUE)
 if (!requireNamespace("stringr", quietly = TRUE)) install.packages("stringr")
 if (!requireNamespace("cli", quietly = TRUE)) install.packages("cli")
 if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
