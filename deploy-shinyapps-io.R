@@ -21,11 +21,15 @@ deploy = function(account = "jumpingrivers", server = "shinyapps.io") {
   rsconnect::setAccountInfo(name = account,
                             token = Sys.getenv("SHINYAPPS_IO_TOKEN"),
                             secret = Sys.getenv("SHINYAPPS_IO_SECRET"))
+  message(Sys.getenv('GITHUB_REPOSITORY'))
+  message(Sys.getenv("GITHUB_REF"))
+  message(Sys.getenv("COMMIT_MESSAGE"))
+  message(is.na(Sys.getenv("SHINYAPPS_IO_TOKEN", NA)))
   slug = stringr::str_match(Sys.getenv('GITHUB_REPOSITORY'), "refs/heads/(.*)")
   message(slug)
   slug = slug[1, 2]
   message("slug: ", slug)
-  appName = paste(slug, Sys.getenv("GITHUB_BASE_REF"), sep = "-")
+  appName = paste(slug, Sys.getenv("GITHUB_REF"), sep = "-")
   message("appName: ", appName)
   rsconnect::deployApp(
     account = account, server = server,
