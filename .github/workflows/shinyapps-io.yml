@@ -8,7 +8,7 @@ on:
 name: shinyapps-deploy
 
 jobs:
-  intergrate:
+  shinyapps-deploy:
     runs-on: ubuntu-18.04
 
     env:
