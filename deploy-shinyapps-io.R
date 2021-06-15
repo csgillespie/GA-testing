@@ -6,7 +6,6 @@ if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
 message(Sys.getenv('GITHUB_REPOSITORY'))
 message(Sys.getenv("GITHUB_REF"))
 message(Sys.getenv("COMMIT_MESSAGE"))
-message(Sys.getenv("GITHUB_HEAD_REF")) # Only works on branches, not direct pushes
 message(is.na(Sys.getenv("SHINYAPPS_IO_TOKEN", NA)))
 # Required for packrat to get a repo
 # install_pkg = function() {
@@ -22,7 +21,9 @@ deploy = function(account = "jumpingrivers", server = "shinyapps.io") {
   rsconnect::setAccountInfo(name = account,
                             token = Sys.getenv("SHINYAPPS_IO_TOKEN"),
                             secret = Sys.getenv("SHINYAPPS_IO_SECRET"))
-  slug = stringr::str_match(Sys.getenv('GITHUB_REPOSITORY'), "refs/heads/(.*)$")[1, 2]
+  slug = stringr::str_match(Sys.getenv('GITHUB_REPOSITORY'), "refs/heads/(.*)")
+  message(slug[1, 2])
+  slug = slug[1, 2]
   message("slug: ", slug)
   appName = paste(slug, Sys.getenv("GITHUB_BASE_REF"), sep = "-")
   message("appName: ", appName)
