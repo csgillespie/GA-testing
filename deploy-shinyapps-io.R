@@ -1,6 +1,7 @@
-if (!requireNamespace("rsconnect")) install.packages("rsconnect")
-if (!requireNamespace("stringr")) install.packages("stringr")
-if (!requireNamespace("cli")) install.packages("cli")
+if (!requireNamespace("rsconnect", quietly = TRUE)) install.packages("rsconnect")
+if (!requireNamespace("stringr", quietly = TRUE)) install.packages("stringr")
+if (!requireNamespace("cli", quietly = TRUE)) install.packages("cli")
+if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
 
 message(Sys.getenv('GITHUB_REPOSITORY'))
 message(Sys.getenv("GITHUB_BASE_REF"))

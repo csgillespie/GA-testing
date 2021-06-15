@@ -10,7 +10,6 @@ name: shinyapps-deploy
 jobs:
   intergrate:
     runs-on: ubuntu-18.04
-    container: rocker/verse
 
     env:
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
